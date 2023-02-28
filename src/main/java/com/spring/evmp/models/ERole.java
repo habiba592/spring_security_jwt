@@ -1,9 +1,11 @@
 package com.spring.evmp.models;
 
 public enum ERole {
-  USER,
-  HR,
+ SUPER_ADMIN,
   ADMIN
   ,
-  admin
+  admin,
+  MAKER,
+  CHECKER,
+  APPROVAL,
 }

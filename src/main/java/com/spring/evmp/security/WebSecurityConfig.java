@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 //import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +31,7 @@ import com.spring.evmp.services.UserDetailsServiceImpl;
     // securedEnabled = true,
     // jsr250Enabled = true,
     prePostEnabled = true)
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // extends WebSecurityConfigurerAdapter {
   @Autowired
   UserDetailsServiceImpl userDetailsService;
@@ -77,7 +79,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // extends
      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
     .authorizeRequests().antMatchers("/api/auth/**").permitAll()
       .antMatchers("/api/users/**").permitAll()
-      .anyRequest().authenticated();
+            .antMatchers("/swagger-ui/**", "/spring_jwt/**").permitAll()
+            .anyRequest().authenticated();
 
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
   }

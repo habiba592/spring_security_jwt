@@ -1,4 +1,6 @@
-package com.spring.evmp.payload.request;
+package com.spring.evmp.dto;
+
+
 
 import com.spring.evmp.models.Company;
 import lombok.Getter;
@@ -10,22 +12,26 @@ import javax.validation.constraints.*;
 
 @Getter
 @Setter
-public class SignupRequest {
+public class UserDto {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
- 
+
     @NotBlank
     @Size(max = 50)
     @Email
     private String email;
-    
+
     private Set<String> role;
 
-    private Company company;
-    
+    private String company;
+
+
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+
+
 
 }

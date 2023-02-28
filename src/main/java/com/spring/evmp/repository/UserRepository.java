@@ -3,6 +3,7 @@ package com.spring.evmp.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.spring.evmp.models.Role;
 import com.spring.evmp.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +25,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
           "where r.name = :role")
   List<User> findByRoles(@Param("role") String role);
 
+  @Query(value = "SELECT role_id FROM user_role WHERE user_id = (SELECT id FROM user WHERE username = :username)", nativeQuery = true)
+  int findRoleIdByUsername(@Param("username") String username);
 
+  List<User> findByRolesContaining(Role role);
 
 }

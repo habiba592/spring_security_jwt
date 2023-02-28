@@ -1,28 +1,25 @@
 package com.spring.evmp.payload.response;
 
 import com.spring.evmp.models.User;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
 public class UserDataResponse {
-    private List<User> users;
+    private List<?> users;
 
-    public UserDataResponse(List<User> users) {
+    public UserDataResponse(List<?> users) {
         this.users = users;
-    }
-
-    public List<User> getUsers() {
-        return users;
     }
 
     @Override
     public String toString() {
-        return "UserDataResponse{" +
-                "users=" + users +
+        return "Response is{" +
+                "response=" + users +
                 '}';
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 }
